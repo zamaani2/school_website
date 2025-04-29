@@ -1,0 +1,588 @@
+{% extends 'school/base.html' %} {% block content %}
+<div class="gallery-page">
+  <div class="gallery-hero">
+    <h1>Gallery</h1>
+    <p>Explore life at Akontombra Senior High School</p>
+  </div>
+
+  <div class="gallery-container">
+    <div class="gallery-section">
+      <div class="section-header">
+        <h2><span class="icon">🏆</span> Sports Activities</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card" onclick="openLightbox(0)">
+          <div class="gallery-image">
+            <img
+              src="/static/GALLERY/slide2.jpg"
+              alt="Football Match"
+              loading="lazy"
+            />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Inter-House Football Tournament</div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox(1)">
+          <div class="gallery-image">
+            <img
+              src="/static/GALLERY/slide3.jpg"
+              alt="Basketball Game"
+              loading="lazy"
+            />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Basketball Championship Finals</div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox(2)">
+          <div class="gallery-image">
+            <img src="/static/slide1.webp" alt="Athletics" loading="lazy" />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">100m Race Finals</div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox(3)">
+          <div class="gallery-image">
+            <img src="/static/slide1.webp" alt="Athletics" loading="lazy" />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">100m Race Finals</div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox(4)">
+          <div class="gallery-image">
+            <img src="/static/slide1.webp" alt="Athletics" loading="lazy" />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">100m Race Finals</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-section">
+      <div class="section-header">
+        <h2><span class="icon">📖</span> Quiz Competitions</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card" onclick="openLightbox(5)">
+          <div class="gallery-image">
+            <img
+              src="https://source.unsplash.com/600x400/?quiz,students"
+              alt="Quiz Competition"
+              loading="lazy"
+            />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">National Science & Maths Quiz</div>
+        </div>
+
+        <div class="gallery-card" onclick="openLightbox(6)">
+          <div class="gallery-image">
+            <img
+              src="/static/HEAD1.png"
+              alt="Debate Competition"
+              loading="lazy"
+            />
+            <div class="overlay">
+              <div class="overlay-content">
+                <span class="view-icon"
+                  ><i class="fas fa-search-plus"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+          <div class="caption">Inter-School Debate Challenge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="close-btn" onclick="closeLightbox()">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="nav-btn prev-btn" onclick="changeImage(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="lightbox-img-container">
+        <img id="lightbox-img" src="" alt="Expanded View" />
+      </div>
+      <button class="nav-btn next-btn" onclick="changeImage(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="caption-container">
+        <p id="lightbox-caption"></p>
+      </div>
+      <div class="counter">
+        <span id="current-index"></span>/<span id="total-images"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Gallery Page Styles */
+  .gallery-page {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+  }
+
+  /* Hero Section */
+  .gallery-hero {
+    padding: 100px 20px 50px;
+    text-align: center;
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
+    color: white;
+    position: relative;
+  }
+
+  .gallery-hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to right bottom, transparent 49%, #f8f9fa 50%);
+  }
+
+  .gallery-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  /* Gallery Container */
+  .gallery-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 30px 20px 80px;
+  }
+
+  /* Section Header */
+  .gallery-section {
+    margin-bottom: 60px;
+  }
+
+  .section-header {
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+
+  .section-header .icon {
+    margin-right: 10px;
+    font-size: 1.6rem;
+  }
+
+  .section-divider {
+    height: 3px;
+    width: 80px;
+    background: linear-gradient(to right, #4ca1af, #2c3e50);
+    border-radius: 2px;
+  }
+
+  /* Gallery Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+  }
+
+  /* Gallery Card */
+  .gallery-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .gallery-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .gallery-image {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+  }
+
+  .gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-card:hover .gallery-image img {
+    transform: scale(1.1);
+  }
+
+  /* Overlay */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(44, 62, 80, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-card:hover .overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    text-align: center;
+  }
+
+  .view-icon {
+    background: white;
+    color: #2c3e50;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-card:hover .view-icon {
+    transform: scale(1);
+  }
+
+  .caption {
+    padding: 15px;
+    font-weight: 500;
+    color: #2c3e50;
+    text-align: center;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+  }
+
+  .lightbox-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-img-container {
+    max-width: 85%;
+    max-height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    color: #4ca1af;
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #4ca1af;
+  }
+
+  .prev-btn {
+    left: 5%;
+  }
+
+  .next-btn {
+    right: 5%;
+  }
+
+  .caption-container {
+    margin-top: 20px;
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    max-width: 600px;
+  }
+
+  .counter {
+    position: absolute;
+    bottom: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .gallery-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-image {
+      height: 180px;
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .prev-btn {
+      left: 15px;
+    }
+
+    .next-btn {
+      right: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-hero h1 {
+      font-size: 2rem;
+    }
+
+    .gallery-hero p {
+      font-size: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  let currentIndex = 0;
+  const images = document.querySelectorAll(".gallery-image img");
+  const captions = document.querySelectorAll(".gallery-card .caption");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxCaption = document.getElementById("lightbox-caption");
+  const currentIndexElement = document.getElementById("current-index");
+  const totalImagesElement = document.getElementById("total-images");
+
+  // Set total images count
+  totalImagesElement.textContent = images.length;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightbox.style.display = "block";
+    document.body.style.overflow = "hidden";
+    updateLightboxImage();
+
+    // Add fade-in animation
+    setTimeout(() => {
+      lightbox.style.opacity = "1";
+    }, 10);
+  }
+
+  function closeLightbox() {
+    lightbox.style.opacity = "0";
+    setTimeout(() => {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "auto";
+    }, 300);
+  }
+
+  function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) {
+      currentIndex = images.length - 1;
+    } else if (currentIndex >= images.length) {
+      currentIndex = 0;
+    }
+    updateLightboxImage();
+  }
+
+  function updateLightboxImage() {
+    // Add fade-out effect before changing image
+    lightboxImg.style.opacity = "0";
+
+    setTimeout(() => {
+      // Update image source
+      lightboxImg.src = images[currentIndex].src;
+
+      // Update caption
+      lightboxCaption.textContent = captions[currentIndex].textContent;
+
+      // Update counter
+      currentIndexElement.textContent = currentIndex + 1;
+
+      // Add fade-in effect after changing image
+      setTimeout(() => {
+        lightboxImg.style.opacity = "1";
+      }, 50);
+    }, 300);
+  }
+
+  // Add touch swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  lightbox.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    if (touchEndX < touchStartX) {
+      // Swipe left (next)
+      changeImage(1);
+    } else if (touchEndX > touchStartX) {
+      // Swipe right (previous)
+      changeImage(-1);
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener("keydown", function (event) {
+    if (lightbox.style.display === "block") {
+      if (event.key === "ArrowLeft") {
+        changeImage(-1);
+      } else if (event.key === "ArrowRight") {
+        changeImage(1);
+      } else if (event.key === "Escape") {
+        closeLightbox();
+      }
+    }
+  });
+
+  // Close lightbox when clicking outside the image
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+</script>
+{% endblock %}

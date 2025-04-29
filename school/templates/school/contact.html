@@ -1,0 +1,169 @@
+{% extends 'school/base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Akontombra Senior High School</title>
+    <style>
+        /* Reset & Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: #f4f4f4; color: #333; }
+        
+        /* Container */
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; text-align: center; }
+
+        /* Header Section */
+        .hero1 {
+            background: url('https://source.unsplash.com/1600x600/?school,campus') center/cover;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero1 h1 { font-size: 3rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a4d2e;
+            text-transform: uppercase;
+        }
+
+        /* Contact Details */
+        .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .contact-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+            text-align: left;
+            width: 300px;
+        }
+        .contact-box i {
+            font-size: 1.5rem;
+            color: #1a4d2e;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            margin-top: 40px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            background-color: #1a4d2e;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #ffd700;
+            color: #1a4d2e;
+        }
+
+        /* Map Section */
+        .map-container {
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero1 h1 { font-size: 2rem; }
+            .contact-details { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero1">
+        <h1>Contact Akontombra Senior High School</h1>
+        <p>We’d love to hear from you! Reach out to us anytime.</p>
+    </div>
+
+    <!-- Contact Details -->
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-details">
+            <div class="contact-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Address</h3>
+                <p>Akontombra, Western North Region, Ghana</p>
+            </div>
+            <div class="contact-box">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>+233 54 107 4220</p>
+            </div>
+            <div class="contact-box">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>info@akontombrashs.edu.gh</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="container">
+        <h2 class="section-title">Send Us a Message</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Google Maps -->
+    <div class="container">
+        <h2 class="section-title">Find Us on the Map</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed/v1/place?q=Akontombra,+Western+North+Region,+Ghana&key=YOUR_GOOGLE_MAPS_API_KEY" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- FontAwesome Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+</body>
+</html>
+
+ 
+    
+{% endblock %}

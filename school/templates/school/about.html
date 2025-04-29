@@ -1,0 +1,596 @@
+{% extends 'school/base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Akontombra SHS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary-light: #2a6d4e;
+            --secondary-color: #ffd700;
+            --white: #ffffff;
+            --gray: #666666;
+            --gray-light: #f5f5f5;
+            --dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            height: 80vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26, 77, 46, 0.7), rgba(26, 77, 46, 0.7)), 
+                        url('https://source.unsplash.com/1600x900/?school,classroom') center/cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary-color);
+            z-index: 2;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .achievement-card {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .achievement-card::before {
+            content: '\f091';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 20px;
+            top: 30px;
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .leadership {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .leader {
+            width: 280px;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .leader:hover {
+            transform: translateY(-10px);
+        }
+
+        .leader-img {
+            position: relative;
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .leader-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .leader:hover .leader-img img {
+            transform: scale(1.1);
+        }
+
+        .leader-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .leader-info h4 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        .leader-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .leader-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--white);
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--primary-color);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .parallax-section {
+            position: relative;
+            padding: 6rem 2rem;
+            background: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.85)), 
+                      url('https://source.unsplash.com/1600x900/?students,education') center/cover fixed;
+            color: var(--white);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat {
+            padding: 2rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* For dark mode support */
+       
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1>Welcome to Akontombra SHS</h1>
+            <p>Nurturing excellence, developing character, and building futures since 1994</p>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="container">
+        <h2 class="section-title" data-aos="fade-up">OUR HISTORY</h2>
+        <p class="section-intro" data-aos="fade-up" data-aos-delay="100">
+            Founded in Ghana, Akontombra Senior High School has been a pillar of education for decades, committed to academic excellence and character development. Akontombra Senior High School (AKONSEC) is a non-denominational Day/Boarding Co-educational institution. It was established in 1994 after Akontombra D/C Methodist primary school was relocated. The school is being nurtured on strong moral principles. The school is located at New Zongo, near the mosque, on Akontombra – Bodi road. The school started with a population of about 50 students and 3 teaching staff in 1994. Currently, the students population is 1211 (616 boys and 595 girls) and a staff strength of 89.
+        </p>
+
+        <!-- Mission/Vision Section -->
+        <div class="grid" data-aos="fade-up" data-aos-delay="200">
+            <div class="card">
+                <div class="card-content">
+                    <h3>Our Mission</h3>
+                    <p>Impacting knowledge to learners for better development</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Our Vision</h3>
+                    <p>A Centre of Academic Excellence in the delivery of holistic education to transform learners to compete globally</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <h3>Core Values</h3>
+                    <p>The core values are "seeking knowledge, unity, discipline, hard work and tolerance"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="parallax-section">
+        <h2 class="section-title" style="color: white;">THE NUMBERS</h2>
+        <div class="stat-grid">
+            <div class="stat" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-number" id="student-count">0</div>
+                <div class="stat-text">Students</div>
+            </div>
+            <div class="stat" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-number" id="staff-count">0</div>
+                <div class="stat-text">Staff Members</div>
+            </div>
+            <div class="stat" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-number" id="year-count">0</div>
+                <div class="stat-text">Years of Excellence</div>
+            </div>
+            <div class="stat" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-number" id="program-count">0</div>
+                <div class="stat-text">Academic Programs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="container">
+        <h2 class="section-title" data-aos="fade-up">OUR ACHIEVEMENTS</h2>
+        <div class="grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="card achievement-card">
+                <div class="card-content">
+                    <h3>BEST SCHOOL IN WESTERN NORTH</h3>
+                    <p>Compete in the National Science and Maths Quiz at Accra.</p>
+                </div>
+            </div>
+
+            <div class="card achievement-card">
+                <div class="card-content">
+                    <h3>Excellent Facilities</h3>
+                    <p>From modern classrooms to science labs, we ensure the best learning environment.</p>
+                </div>
+            </div>
+
+            <div class="card achievement-card">
+                <div class="card-content">
+                    <h3>Strong Student Support</h3>
+                    <p>We provide mentorship, counseling, and career guidance to help students succeed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="container">
+        <h2 class="section-title" data-aos="fade-up">BOARD OF DIRECTORS</h2>
+        <div class="leadership">
+            <div class="leader" data-aos="fade-up" data-aos-delay="100">
+                <div class="leader-img">
+                    <img src="/static/HEAD1.png" alt="Headmaster" onerror="this.src='https://source.unsplash.com/300x300/?principal'">
+                </div>
+                <div class="leader-info">
+                    <h4>Mr. James Mensah</h4>
+                    <p>Headmaster</p>
+                    <div class="leader-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="leader" data-aos="fade-up" data-aos-delay="200">
+                <div class="leader-img">
+                    <img src="https://source.unsplash.com/300x300/?woman,teacher" alt="Academic Head">
+                </div>
+                <div class="leader-info">
+                    <h4>Mrs. Akosua Osei</h4>
+                    <p>Academic Head</p>
+                    <div class="leader-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="leader" data-aos="fade-up" data-aos-delay="300">
+                <div class="leader-img">
+                    <img src="https://source.unsplash.com/300x300/?man,education" alt="Student Affairs">
+                </div>
+                <div class="leader-info">
+                    <h4>Dr. Kwame Boadu</h4>
+                    <p>Dean of Student Affairs</p>
+                    <div class="leader-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-aos="fade-up">MANAGEMENT</h2>
+        <div class="leadership">
+            <div class="leader" data-aos="fade-up" data-aos-delay="100">
+                <div class="leader-img">
+                    <img src="/static/HEAD1.png" alt="Headmaster" onerror="this.src='https://source.unsplash.com/300x300/?principal'">
+                </div>
+                <div class="leader-info">
+                    <h4>Mr. James Mensah</h4>
+                    <p>Headmaster</p>
+                    <div class="leader-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="leader" data-aos="fade-up" data-aos-delay="200">
+                <div class="leader-img">
+                    <img src="https://source.unsplash.com/300x300/?woman,teacher" alt="Academic Head">
+                </div>
+                <div class="leader-info">
+                    <h4>Mrs. Akosua Osei</h4>
+                    <p>Academic Head</p>
+                    <div class="leader-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="leader" data-aos="fade-up" data-aos-delay="300">
+                <div class="leader-img">
+                    <img src="https://source.unsplash.com/300x300/?man,education" alt="Student Affairs">
+                </div>
+                <div class="leader-info">
+                    <h4>Dr. Kwame Boadu</h4>
+                    <p>Dean of Student Affairs</p>
+                    <div class="leader-social">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="#admissions" class="btn" data-aos="fade-up">Join Akontombra SHS</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease',
+                once: true,
+                offset: 100
+            });
+
+            // Counter animation
+            function animateCounter(id, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    document.getElementById(id).innerText = value;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Intersection Observer to trigger counter animations when scrolled into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter('student-count', 0, 1211, 2000);
+                        animateCounter('staff-count', 0, 89, 2000);
+                        animateCounter('year-count', 0, 31, 2000);
+                        animateCounter('program-count', 0, 6, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const statsSection = document.querySelector('.parallax-section');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const heroImage = document.querySelector('.hero-image');
+                if (heroImage) {
+                    heroImage.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+                }
+            });
+        });
+    </script>
+</body>
+{% endblock %}
