@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "whitenoise.runserver_nostatic",
     "django_extensions",
-    "sslserver",
 ]
 
 MIDDLEWARE = [
