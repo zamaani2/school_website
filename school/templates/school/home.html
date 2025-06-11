@@ -1,66 +1,109 @@
 {% extends 'school/base.html' %} {% block content %}
 <style>
+  /* Base styles for modern look - will be used throughout */
+  :root {
+    --transition-standard: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.07);
+    --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px;
     margin-top: 2rem;
   }
 
   .card {
     background: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 16px;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-standard);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border: none;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
   }
 
   .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .card:hover::after {
+    transform: scaleX(1);
   }
 
   .card h3 {
     font-size: 1.5rem;
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
   }
 
   .card p {
     font-size: 1rem;
+    line-height: 1.6;
   }
 </style>
-<!-- Hero Section -->
+
+<!-- Hero Section - Updated for modern design -->
 <section class="hero" id="home">
   <div class="carousel">
     <div
       class="carousel-slide active"
-      style="background-image: url('/static/emergency_block.jpg')"
+      style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/static/emergency_block.jpg'); background-size: cover; background-position: center;"
     >
       <div class="carousel-text">
-        <h1>Welcome to Akontombra Senior High School</h1>
+        <span class="pre-title">Welcome to</span>
+        <h1>Akontombra Senior High School</h1>
         <p>Empowering Minds, Shaping Futures</p>
-        <a href="#admission" class="btn">Apply Now</a>
+        <div class="hero-buttons">
+          <a href="#admission" class="btn btn-primary">Apply Now</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
+        </div>
       </div>
     </div>
     <div
       class="carousel-slide"
-      style="background-image: url('/static/GALLERY/slide2.jpg')"
+      style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/static/GALLERY/slide2.jpg'); background-size: cover; background-position: center;"
     >
       <div class="carousel-text">
+        <span class="pre-title">Discover</span>
         <h1>Excellence in Education</h1>
         <p>We nurture future leaders with top-notch education</p>
-        <a href="#about" class="btn">Learn More</a>
+        <div class="hero-buttons">
+          <a href="#about" class="btn btn-primary">Learn More</a>
+          <a href="#contact" class="btn btn-outline">Contact Us</a>
+        </div>
       </div>
     </div>
     <div
       class="carousel-slide"
-      style="background-image: url('/static/GALLERY/slide3.jpg')"
+      style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/static/GALLERY/slide3.jpg'); background-size: cover; background-position: center;"
     >
       <div class="carousel-text">
+        <span class="pre-title">Experience</span>
         <h1>A Thriving Student Life</h1>
         <p>Explore our extracurricular activities and clubs</p>
-        <a href="#student-life" class="btn">Discover More</a>
+        <div class="hero-buttons">
+          <a href="#student-life" class="btn btn-primary">Discover More</a>
+          <a href="#gallery" class="btn btn-outline">View Gallery</a>
+        </div>
       </div>
     </div>
 
@@ -70,25 +113,41 @@
       <span class="carousel-dot" data-slide="1"></span>
       <span class="carousel-dot" data-slide="2"></span>
     </div>
+    
+    <!-- Carousel Arrows -->
+    <button class="carousel-arrow prev-arrow" aria-label="Previous slide">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-arrow next-arrow" aria-label="Next slide">
+      <i class="fas fa-chevron-right"></i>
+    </button>
   </div>
 </section>
 
-<!-- Welcome Section -->
+<!-- Welcome Section - Updated for modern design -->
 <section class="section" id="welcome">
   <div class="container">
-    <h2 class="section-title">
-      Welcome to <span class="highlight">ASHS</span>
-    </h2>
+    <div class="section-header">
+      <span class="section-subtitle">Discover ASHS</span>
+      <h2 class="section-title">
+        Welcome to <span class="highlight">Akontombra SHS</span>
+      </h2>
+      <div class="section-underline"></div>
+    </div>
     <div class="welcome-intro">
       <p class="lead-text">
         Empowering students through quality education, innovative teaching
-        methods, and a supportive learning environment.
+        methods, and a supportive learning environment that fosters academic excellence
+        and personal growth.
       </p>
     </div>
     <div class="grid">
       <div class="card featured-card">
         <div class="card-image">
-          <img src="/static/HEAD1.png" alt="Headmaster" class="rounded-image" />
+          <div class="image-container">
+            <img src="/static/HEAD1.png" alt="Headmaster" class="rounded-image" />
+          </div>
+          <div class="image-overlay"></div>
         </div>
         <div class="card-content">
           <h3><i class="fas fa-user-tie"></i> Headmaster's Welcome</h3>
@@ -98,15 +157,18 @@
             team of educators is committed to providing a nurturing environment
             where every student can thrive academically and personally.
           </p>
-          <a href="#" class="btn-link"
-            >Read Full Message <i class="fas fa-arrow-right"></i
-          ></a>
+          <a href="#" class="btn-link">
+            Read Full Message <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
       <div class="card mission-vision-card">
         <div class="card-content">
           <div class="mission-box">
-            <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+            <div class="icon-container">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3>Our Mission</h3>
             <p>
               Impacting knowledge to learners for better development and
               fostering a community of lifelong learners prepared to make
@@ -114,7 +176,10 @@
             </p>
           </div>
           <div class="vision-box">
-            <h3><i class="fas fa-eye"></i> Our Vision</h3>
+            <div class="icon-container">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3>Our Vision</h3>
             <p>
               A Centre of Academic Excellence in the delivery of holistic
               education to transform learners to compete globally while
@@ -125,26 +190,29 @@
       </div>
       <div class="card values-card">
         <div class="card-content">
-          <h3><i class="fas fa-star"></i> Core Values</h3>
+          <div class="icon-container">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Core Values</h3>
           <div class="values-container">
             <div class="value-item">
-              <span class="value-icon">❖</span>
+              <span class="value-icon"><i class="fas fa-handshake"></i></span>
               <span class="value-text">Unity</span>
             </div>
             <div class="value-item">
-              <span class="value-icon">❖</span>
+              <span class="value-icon"><i class="fas fa-medal"></i></span>
               <span class="value-text">Discipline</span>
             </div>
             <div class="value-item">
-              <span class="value-icon">❖</span>
-              <span class="value-text">Seeking Knowledge</span>
+              <span class="value-icon"><i class="fas fa-book"></i></span>
+              <span class="value-text">Knowledge</span>
             </div>
             <div class="value-item">
-              <span class="value-icon">❖</span>
+              <span class="value-icon"><i class="fas fa-tasks"></i></span>
               <span class="value-text">Hard Work</span>
             </div>
             <div class="value-item">
-              <span class="value-icon">❖</span>
+              <span class="value-icon"><i class="fas fa-heart"></i></span>
               <span class="value-text">Tolerance</span>
             </div>
           </div>
@@ -154,14 +222,19 @@
   </div>
 </section>
 
-<!-- Why Choose Us Section -->
+<!-- Why Choose Us Section - Modernized -->
 <section class="section section-alt" id="why-choose">
   <div class="container">
-    <h2 class="section-title">
-      Why Choose <span class="highlight">Akontombra SHS</span>?
-    </h2>
-    <p class="section-subtitle">
+    <div class="section-header">
+      <span class="section-subtitle">Our Advantages</span>
+      <h2 class="section-title">
+        Why Choose <span class="highlight">Akontombra SHS</span>?
+      </h2>
+      <div class="section-underline"></div>
+    </div>
+    <p class="section-description">
       Discover the Akontombra advantage and how we're shaping tomorrow's leaders
+      through excellence in education and character development.
     </p>
 
     <div class="features-grid">
@@ -175,6 +248,9 @@
           students for university and beyond with innovative teaching methods
           and a curriculum designed for success.
         </p>
+        <div class="feature-hover-content">
+          <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
       <div class="feature-card">
@@ -187,6 +263,9 @@
           centers, we provide the best learning environment to support academic
           excellence.
         </p>
+        <div class="feature-hover-content">
+          <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
       <div class="feature-card">
@@ -199,6 +278,9 @@
           comprehensive career guidance to help every student reach their full
           potential.
         </p>
+        <div class="feature-hover-content">
+          <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
 
       <div class="feature-card">
@@ -211,24 +293,31 @@
           interests and career paths, ensuring each student finds their path to
           success.
         </p>
+        <div class="feature-hover-content">
+          <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
       </div>
     </div>
 
     <div class="cta-container">
       <a href="#admission" class="btn btn-lg">Apply Now</a>
-      <a href="#about" class="btn btn-outline">Learn More</a>
+      <a href="#about" class="btn btn-outline btn-lg">Learn More</a>
     </div>
   </div>
 </section>
 
-<!-- News Section -->
+<!-- News Section - Modernized -->
 <section class="section" id="news">
   <div class="container">
-    <h2 class="section-title">
-      Latest <span class="highlight">News & Events</span>
-    </h2>
-    <p class="section-subtitle">
-      Stay updated with the latest happenings at Akontombra SHS
+    <div class="section-header">
+      <span class="section-subtitle">Stay Updated</span>
+      <h2 class="section-title">
+        Latest <span class="highlight">News & Events</span>
+      </h2>
+      <div class="section-underline"></div>
+    </div>
+    <p class="section-description">
+      Stay updated with the latest happenings at Akontombra SHS and never miss important events.
     </p>
 
     <div class="news-grid">
@@ -239,9 +328,11 @@
             <span class="day">15</span>
             <span class="month">MAR</span>
           </div>
+          <div class="news-tag-container">
+            <span class="news-tag">Event</span>
+          </div>
         </div>
         <div class="news-content">
-          <span class="news-tag">Event</span>
           <h3>Annual Science Fair 2025</h3>
           <p>
             Join us for an exciting showcase of student projects and innovations
@@ -261,9 +352,11 @@
             <span class="day">22</span>
             <span class="month">APR</span>
           </div>
+          <div class="news-tag-container">
+            <span class="news-tag">Sports</span>
+          </div>
         </div>
         <div class="news-content">
-          <span class="news-tag">Sports</span>
           <h3>Inter-House Sports Tournament</h3>
           <p>
             Celebrating athletic excellence and team spirit as our houses
@@ -282,9 +375,11 @@
             <span class="day">10</span>
             <span class="month">MAY</span>
           </div>
+          <div class="news-tag-container">
+            <span class="news-tag">Culture</span>
+          </div>
         </div>
         <div class="news-content">
-          <span class="news-tag">Culture</span>
           <h3>Annual Cultural Festival</h3>
           <p>
             Experience diverse traditions and performances showcasing the rich
@@ -305,30 +400,40 @@
   </div>
 </section>
 
-<!-- Login Section -->
+<!-- Login Section - Modernized -->
 <section class="section section-alt" id="login">
   <div class="container">
     <div class="login-container">
       <div class="login-info">
-        <h2 class="section-title">
-          Student & Staff <span class="highlight">Portal</span>
-        </h2>
+        <div class="section-header left-aligned">
+          <span class="section-subtitle">Access Your Account</span>
+          <h2 class="section-title">
+            Student & Staff <span class="highlight">Portal</span>
+          </h2>
+          <div class="section-underline left-aligned"></div>
+        </div>
         <p class="login-description">
           Access your personalized dashboard to view academic records,
           assignments, school announcements, and more.
         </p>
         <div class="login-features">
           <div class="login-feature">
-            <i class="fas fa-book"></i>
-            <span>Access course materials</span>
+            <div class="feature-icon-small">
+              <i class="fas fa-book"></i>
+            </div>
+            <span>Access course materials and resources</span>
           </div>
           <div class="login-feature">
-            <i class="fas fa-chart-line"></i>
-            <span>Track academic progress</span>
+            <div class="feature-icon-small">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <span>Track academic progress and performance</span>
           </div>
           <div class="login-feature">
-            <i class="fas fa-calendar-alt"></i>
-            <span>View school calendar</span>
+            <div class="feature-icon-small">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <span>View school calendar and upcoming events</span>
           </div>
         </div>
         <div class="need-help">
@@ -338,6 +443,9 @@
 
       <div class="login-form-container">
         <div class="form-header">
+          <div class="form-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>
           <h3>Account Login</h3>
           <p>Enter your credentials to access your account</p>
         </div>
@@ -388,36 +496,92 @@
   /* Modern styling for the updated sections */
 
   /* General Styles */
+  :root {
+    --transition-standard: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.07);
+    --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
   .section {
-    padding: 5rem 0;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
   }
 
   .section-alt {
     background-color: var(--light-bg);
+    position: relative;
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-subtitle {
+    display: inline-block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
   }
 
   .section-title {
     font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: var(--primary-color);
+    position: relative;
+    display: inline-block;
   }
 
-  .section-subtitle {
+  .section-underline {
+    height: 4px;
+    width: 70px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .left-aligned {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .section-description {
     text-align: center;
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    color: var(--text-color);
+    line-height: 1.6;
   }
 
   .highlight {
     color: var(--accent-color);
+    position: relative;
+  }
+
+  .highlight::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    opacity: 0.5;
   }
 
   .lead-text {
@@ -426,23 +590,47 @@
     max-width: 800px;
     margin: 0 auto 3rem;
     color: var(--text-color);
+    line-height: 1.6;
   }
 
+  /* Button Styles */
   .btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.8rem;
     background-color: var(--primary-color);
     color: white;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: var(--transition-standard);
     border: 2px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
   }
 
-  .btn:hover {
-    background-color: transparent;
-    color: var(--primary-color);
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+
+  .btn:hover::after {
+    transform: translateX(0);
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
   }
 
   .btn-outline {
@@ -456,7 +644,7 @@
   }
 
   .btn-lg {
-    padding: 1rem 2rem;
+    padding: 1rem 2.2rem;
     font-size: 1.1rem;
   }
 
@@ -470,7 +658,27 @@
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-standard);
+    position: relative;
+    padding-bottom: 3px;
+  }
+
+  .btn-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .btn-link i {
@@ -478,89 +686,213 @@
     transition: transform 0.3s ease;
   }
 
-  .btn-link:hover {
-    color: var(--accent-color);
-  }
-
   .btn-link:hover i {
     transform: translateX(5px);
   }
 
-  /* Welcome Section */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    max-height: 800px;
+    overflow: hidden;
+  }
+
+  .carousel {
+    height: 100%;
+    position: relative;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .carousel-text {
+    max-width: 800px;
+    padding: 0 2rem;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 1s ease 0.5s;
+  }
+
+  .carousel-slide.active .carousel-text {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .pre-title {
+    display: inline-block;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, var(--accent-color), white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+  }
+
+  .carousel-text h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .carousel-text p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
     margin-top: 2rem;
   }
 
-  .card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
+  .carousel-nav {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
   }
 
-  .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  .carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: var(--transition-standard);
   }
 
+  .carousel-dot.active {
+    background-color: white;
+    transform: scale(1.2);
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-standard);
+    z-index: 10;
+    backdrop-filter: blur(5px);
+  }
+
+  .carousel-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .prev-arrow {
+    left: 20px;
+  }
+
+  .next-arrow {
+    right: 20px;
+  }
+
+  /* Welcome Section */
   .card-image {
     position: relative;
     overflow: hidden;
-    height: 200px;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: rgba(var(--primary-rgb), 0.05);
   }
 
-  .card-image img {
-    width: 150px;
-    height: 150px;
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 5px solid rgba(var(--primary-rgb), 0.1);
+    transition: var(--transition-standard);
+  }
+
+  .card:hover .image-container {
+    border-color: rgba(var(--accent-rgb), 0.2);
+  }
+
+  .rounded-image {
+    width: 180px;
+    height: 180px;
     object-fit: cover;
     transition: transform 0.5s ease;
   }
 
-  .rounded-image {
-    border-radius: 50%;
-    border: 5px solid rgba(var(--primary-rgb), 0.1);
+  .card:hover .rounded-image {
+    transform: scale(1.05);
   }
 
   .card-content {
-    padding: 1.5rem;
+    padding: 1.8rem;
   }
 
-  .card-content h3 {
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+  .icon-container {
+    width: 50px;
+    height: 50px;
+    background: rgba(var(--primary-rgb), 0.1);
+    border-radius: 50%;
     display: flex;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 1rem;
+    transition: var(--transition-standard);
   }
 
-  .card-content h3 i {
-    margin-right: 0.5rem;
-    color: var(--accent-color);
+  .card:hover .icon-container {
+    background: var(--primary-color);
   }
 
-  .featured-card {
-    grid-column: span 1;
+  .icon-container i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: var(--transition-standard);
   }
 
-  .mission-vision-card,
-  .values-card {
-    display: flex;
-    flex-direction: column;
+  .card:hover .icon-container i {
+    color: white;
   }
 
-  .mission-box,
+  .mission-box, 
   .vision-box {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    transition: var(--transition-standard);
   }
 
   .mission-box {
@@ -569,17 +901,17 @@
 
   .values-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
   }
 
   .value-item {
     display: flex;
     align-items: center;
     background-color: rgba(var(--primary-rgb), 0.05);
-    padding: 0.75rem;
+    padding: 0.8rem;
     border-radius: 10px;
-    transition: all 0.3s ease;
+    transition: var(--transition-standard);
   }
 
   .value-item:hover {
@@ -588,9 +920,12 @@
   }
 
   .value-icon {
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
     color: var(--accent-color);
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .value-text {
@@ -598,7 +933,7 @@
     font-size: 0.9rem;
   }
 
-  /* Why Choose Us Section */
+  /* Features Section */
   .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -608,58 +943,60 @@
 
   .feature-card {
     background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-medium);
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-standard);
     position: relative;
     z-index: 1;
     overflow: hidden;
+    height: 100%;
   }
 
-  .feature-card::before {
+  .feature-card::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--primary-color);
-    transition: height 0.3s ease;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+    transition: width 0.3s ease;
     z-index: -1;
   }
 
-  .feature-card:hover::before {
-    height: 100%;
+  .feature-card:hover::after {
+    width: 100%;
     opacity: 0.05;
   }
 
   .feature-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-elevated);
   }
 
   .feature-icon {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background: rgba(var(--primary-rgb), 0.1);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto 1.5rem;
-    transition: all 0.3s ease;
+    transition: var(--transition-standard);
   }
 
   .feature-card:hover .feature-icon {
     background: var(--primary-color);
+    transform: scale(1.1);
   }
 
   .feature-icon i {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
-    transition: all 0.3s ease;
+    transition: var(--transition-standard);
   }
 
   .feature-card:hover .feature-icon i {
@@ -668,8 +1005,40 @@
 
   .feature-card h3 {
     margin-bottom: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--primary-color);
+    font-weight: 600;
+  }
+
+  .feature-hover-content {
+    margin-top: 1.5rem;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    opacity: 0;
+  }
+
+  .feature-card:hover .feature-hover-content {
+    height: auto;
+    opacity: 1;
+  }
+
+  .feature-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .feature-link i {
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-link:hover i {
+    transform: translateX(5px);
   }
 
   .cta-container {
@@ -678,33 +1047,34 @@
   }
 
   .cta-container .btn {
-    margin: 0 0.5rem;
+    margin: 0 0.8rem;
   }
 
   /* News Section */
   .news-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     margin-bottom: 3rem;
   }
 
   .news-card {
     background: white;
-    border-radius: 15px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-standard);
+    height: 100%;
   }
 
   .news-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-elevated);
   }
 
   .news-image {
     position: relative;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
   }
 
@@ -725,15 +1095,17 @@
     left: 15px;
     background: var(--primary-color);
     color: white;
-    padding: 0.5rem;
-    border-radius: 5px;
+    padding: 0.6rem;
+    border-radius: 10px;
     text-align: center;
     line-height: 1;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
 
   .news-date .day {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
   }
 
@@ -743,25 +1115,34 @@
     font-weight: 600;
   }
 
-  .news-content {
-    padding: 1.5rem;
+  .news-tag-container {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
   }
 
   .news-tag {
     display: inline-block;
-    background: rgba(var(--accent-rgb), 0.1);
-    color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.3rem 0.8rem;
+    padding: 0.5rem 1rem;
     border-radius: 50px;
-    margin-bottom: 1rem;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .news-content {
+    padding: 1.8rem;
   }
 
   .news-content h3 {
     margin-bottom: 1rem;
     font-size: 1.3rem;
     color: var(--primary-color);
+    font-weight: 600;
   }
 
   .news-link {
@@ -770,17 +1151,32 @@
     color: var(--primary-color);
     font-weight: 600;
     text-decoration: none;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
+    margin-top: 1.2rem;
+    position: relative;
+    padding-bottom: 3px;
+  }
+
+  .news-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .news-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .news-link i {
     margin-left: 0.5rem;
     transition: transform 0.3s ease;
-  }
-
-  .news-link:hover {
-    color: var(--accent-color);
   }
 
   .news-link:hover i {
@@ -789,19 +1185,19 @@
 
   .news-view-all {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
   }
 
   /* Login Section */
   .login-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 40px;
     align-items: center;
     background: white;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-elevated);
   }
 
   .login-info {
@@ -815,6 +1211,7 @@
   .login-description {
     margin-bottom: 2rem;
     font-size: 1.1rem;
+    line-height: 1.6;
   }
 
   .login-features {
@@ -824,34 +1221,76 @@
   .login-feature {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
 
-  .login-feature i {
+  .feature-icon-small {
     width: 40px;
     height: 40px;
     background: rgba(var(--primary-rgb), 0.1);
     color: var(--primary-color);
-    border-radius: 50%;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 1rem;
+    transition: var(--transition-standard);
+  }
+
+  .login-feature:hover .feature-icon-small {
+    background: var(--primary-color);
+  }
+
+  .login-feature:hover .feature-icon-small i {
+    color: white;
   }
 
   .need-help {
     font-size: 0.9rem;
+    margin-top: 2rem;
   }
 
   .need-help a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+
+  .need-help a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .need-help a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .login-form-container {
     padding: 3rem;
     background: var(--light-bg);
+    position: relative;
+  }
+
+  .login-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
   }
 
   .form-header {
@@ -859,10 +1298,24 @@
     text-align: center;
   }
 
+  .form-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+  }
+
   .form-header h3 {
     font-size: 1.5rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+    font-weight: 600;
   }
 
   .form-group {
@@ -871,7 +1324,7 @@
 
   .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     color: var(--text-color);
     font-weight: 600;
   }
@@ -879,15 +1332,16 @@
   .form-group input[type="text"],
   .form-group input[type="password"] {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 0.9rem 1rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: var(--transition-standard);
+    background: white;
   }
 
   .form-group input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
     outline: none;
   }
 
@@ -896,8 +1350,9 @@
     text-align: right;
     font-size: 0.85rem;
     color: var(--text-muted);
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
     text-decoration: none;
+    transition: var(--transition-standard);
   }
 
   .forgot-password:hover {
@@ -910,7 +1365,8 @@
   }
 
   .form-checkbox input {
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
+    accent-color: var(--primary-color);
   }
 
   .form-checkbox label {
@@ -919,48 +1375,198 @@
   }
 
   /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .section-title {
+      font-size: 2.2rem;
+    }
+    
+    .carousel-text h1 {
+      font-size: 2.8rem;
+    }
+    
+    .carousel-text p {
+      font-size: 1.3rem;
+    }
+  }
+
   @media (max-width: 768px) {
+    .section {
+      padding: 4rem 0;
+    }
+    
     .section-title {
       font-size: 2rem;
     }
-
+    
+    .carousel-text h1 {
+      font-size: 2.2rem;
+    }
+    
+    .carousel-text p {
+      font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .hero-buttons .btn {
+      width: 80%;
+    }
+    
     .login-container {
       grid-template-columns: 1fr;
     }
-
+    
     .login-info,
     .login-form-container {
       padding: 2rem;
     }
+    
+    .section-header {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .carousel-text h1 {
+      font-size: 1.8rem;
+    }
+    
+    .pre-title {
+      font-size: 1rem;
+    }
+    
+    .carousel-text p {
+      font-size: 1rem;
+    }
+    
+    .features-grid,
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+    }
   }
 </style>
+
 <script>
-  // Carousel functionality
-  const slides = document.querySelectorAll(".carousel-slide");
-  const dots = document.querySelectorAll(".carousel-dot");
-  let currentSlide = 0;
+  // Enhanced Carousel functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll(".carousel-slide");
+    const dots = document.querySelectorAll(".carousel-dot");
+    const prevArrow = document.querySelector(".prev-arrow");
+    const nextArrow = document.querySelector(".next-arrow");
+    let currentSlide = 0;
+    let isAnimating = false;
+    let autoSlideInterval;
 
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.remove("active");
-      dots[i].classList.remove("active");
+    function showSlide(index) {
+      if (isAnimating) return;
+      isAnimating = true;
+      
+      // Hide current slide
+      slides[currentSlide].classList.remove("active");
+      dots[currentSlide].classList.remove("active");
+      
+      // Update current slide index
+      currentSlide = index;
+      
+      // Show new slide
+      slides[currentSlide].classList.add("active");
+      dots[currentSlide].classList.add("active");
+      
+      // Reset animation flag after transition completes
+      setTimeout(() => {
+        isAnimating = false;
+      }, 1000);
+      
+      // Reset auto slide timer
+      resetAutoSlide();
+    }
+
+    function nextSlide() {
+      const newIndex = (currentSlide + 1) % slides.length;
+      showSlide(newIndex);
+    }
+
+    function prevSlide() {
+      const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(newIndex);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(nextSlide, 6000);
+    }
+
+    // Initialize click events
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        showSlide(i);
+      });
     });
-    slides[index].classList.add("active");
-    dots[index].classList.add("active");
-  }
 
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
+    if (prevArrow && nextArrow) {
+      prevArrow.addEventListener("click", prevSlide);
+      nextArrow.addEventListener("click", nextSlide);
+    }
 
-  dots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-      currentSlide = i;
-      showSlide(currentSlide);
+    // Start auto slide
+    resetAutoSlide();
+    
+    // Add swipe support for touch devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const carousel = document.querySelector('.carousel');
+    
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      if (touchEndX < touchStartX - swipeThreshold) {
+        // Swipe left - next slide
+        nextSlide();
+      } else if (touchEndX > touchStartX + swipeThreshold) {
+        // Swipe right - previous slide
+        prevSlide();
+      }
+    }
+    
+    // Pause auto-slide when user hovers over carousel
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoSlideInterval);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      resetAutoSlide();
     });
   });
-
-  setInterval(nextSlide, 5000); // Auto slide every 5 seconds
+  
+  // Feature cards hover effect for mobile
+  document.addEventListener('DOMContentLoaded', function() {
+    const featureCards = document.querySelectorAll('.feature-card');
+    
+    featureCards.forEach(card => {
+      if ('ontouchstart' in window) {
+        card.addEventListener('click', function() {
+          this.classList.toggle('hover-active');
+        });
+      }
+    });
+  });
 </script>
 {% endblock %}

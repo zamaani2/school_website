@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get(
     "ALLOWED_HOSTS", "localhost,127.0.0.1,.onrender.com"
@@ -59,6 +59,23 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Remove custom middleware to prevent HTTPS redirects
+# if DEBUG:
+#     # Create a middleware path
+#     import os.path
+#
+#     middleware_dir = os.path.join(BASE_DIR, "school_website", "middleware")
+#     os.makedirs(middleware_dir, exist_ok=True)
+#     middleware_file = os.path.join(middleware_dir, "__init__.py")
+#     if not os.path.exists(middleware_file):
+#         with open(middleware_file, "w") as f:
+#             f.write("# Custom middleware package\n")
+#
+#     # Add middleware to the beginning of the list to intercept redirects early
+#     MIDDLEWARE.insert(
+#         0, "school_website.middleware.http_redirect_middleware.HttpRedirectMiddleware"
+#     )
 
 ROOT_URLCONF = "school_website.urls"
 
@@ -143,12 +160,28 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# Security settings for production
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    # Only enable SSL redirect if not on Render (Render handles SSL)
-    SECURE_SSL_REDIRECT = os.environ.get("RENDER") != "true"
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+# Remove all HTTPS-related settings
+# Force the development server to not perform SSL checks
+# This will prevent the "Bad request version" errors
+# if DEBUG:
+#     import sys
+#
+#     sys.argv = [arg for arg in sys.argv if arg != "--noreload"]
+#     # Disable SSL/HTTPS checks
+#     os.environ["PYTHONHTTPSVERIFY"] = "0"
+#
+#     # Explicitly set these to make absolutely sure HTTPS is disabled
+#     os.environ["SECURE_SSL_REDIRECT"] = "False"
+#     os.environ["FORCE_HTTP"] = "True"
+#
+#     # Force HTTP across the board
+#     SECURE_SSL_REDIRECT = False
+#     SECURE_HSTS_SECONDS = 0
+#     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+#     SECURE_HSTS_PRELOAD = False
+
+# Simplified security settings
+SECURE_SSL_REDIRECT = False
+SECURE_PROXY_SSL_HEADER = None
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
