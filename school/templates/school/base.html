@@ -1,118 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Akontombra Senior High School - Empowering Minds, Shaping Futures. Quality education in Western North Region, Ghana.">
-    <meta name="keywords" content="Akontombra, Senior High School, Education, Ghana, Western North Region">
-    <meta name="author" content="Akontombra Senior High School">
-    
-    <title>{% block title %}Akontombra Senior High School - Empowering Minds, Shaping Futures{% endblock %}</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="/static/LOGO2.png" type="image/png">
-    
-    <!-- Font Awesome -->
+    <title>Akontombra Senior High School - Empowering Minds, Shaping Futures</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Senior High School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
     <link href="/static/css/style.css" rel="stylesheet">
-    
-    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <header class="main-header">
         <nav class="nav-container">
-            <a href="{% url 'home' %}" class="logo">
-                <img src="/static/LOGO2.png" alt="Akontombra SHS Logo">
-                <span>AKONSEC</span>
-            </a>
-            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="main-nav">
-                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
-                <a class="nav-link {% if 'about' in request.path %}active{% endif %}" href="{% url 'about' %}">About Us</a>
-                <a class="nav-link {% if 'programs' in request.path %}active{% endif %}" href="{% url 'programs' %}">Academics</a>
-                <a class="nav-link {% if 'news' in request.path %}active{% endif %}" href="{% url 'news' %}">News</a>
-                <a class="nav-link {% if 'student_life' in request.path %}active{% endif %}" href="{% url 'student_life' %}">Student Life</a>
-                <a class="nav-link {% if 'gallery' in request.path %}active{% endif %}" href="{% url 'gallery' %}">Gallery</a>
-                <a class="nav-link {% if 'contact' in request.path %}active{% endif %}" href="{% url 'contact' %}">Contact</a>
-            </div>
+          <a href="{% url 'home' %}" class="logo"><img src="/static/LOGO2.png">AKONSEC</a>
+          <button class="mobile-menu-btn      ">
+              <i class="fas fa-bars"></i>
+          </button>
+          <div class="main-nav">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+            <a class="nav-link" href="{% url 'programs' %}">Academics</a>
+            <a class="nav-link" href="{% url 'news' %}">News</a>
+            <a href="{% url 'student_life' %}">Student Life</a>
+            <a href="{% url 'gallery' %}">Gallery</a>
+            <a href="{% url 'contact' %}">Contact</a>
+          </div>
         </nav>
     </header>
-
-    <main class="main-content">
-        {% block content %}{% endblock %}
-    </main>
-
+        {% block content %}
+        
+        
+        
+        {% endblock %}
     <footer class="footer">
         <div class="footer-grid">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Akontombra, Western North Region</li>
-                    <li><i class="fas fa-phone"></i> +233 XX XXX XXXX</li>
-                    <li><i class="fas fa-envelope"></i> info@akontombrashs.edu.gh</li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="{% url 'about' %}">About Us</a></li>
-                    <li><a href="{% url 'programs' %}">Academics</a></li>
-                    <li><a href="{% url 'news' %}">News & Events</a></li>
-                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Follow Us</h3>
-                <ul class="social-links">
-                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Our Mission</h3>
-                <p>To provide quality education that empowers students with knowledge, skills, and values to excel in their academic pursuits and contribute positively to society.</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; {% now "Y" %} Akontombra Senior High School. All Rights Reserved.</p>
+          <div class="footer-section">
+              <h3>Contact Us</h3>
+              <ul>
+                  <li><i class="fas fa-map-marker-alt"></i> Akontombra, Western North Region</li>
+                  <li><i class="fas fa-phone"></i> +233 XX XXX XXXX</li>
+                  <li><i class="fas fa-envelope"></i> info@akontombrashs.edu.gh</li>
+              </ul>
+          </div>
+          <div class="footer-section">
+              <h3>Quick Links</h3>
+              <ul>
+                  <li><a href="{% url 'about' %}">About Us</a></li>
+                  <li><a href="#academics">Academics</a></li>
+                  <li><a href="#admission">Admissions</a></li>
+                  <li><a href="#news">News & Events</a></li>
+                  
+              </ul>
+          </div>
+          <div class="footer-section">
+              <h3>Follow Us</h3>
+              <ul>
+                  <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                  <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                  <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+              </ul>
+          </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mainNav = document.querySelector('.main-nav');
         
         mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
+          mainNav.classList.toggle('active');
         });
         
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth'
+              });
+          });
         });
-    </script>
-    
-    {% block extra_js %}{% endblock %}
+        
+        // Login Form Handler
+        const loginForm = document.querySelector('.login-form');
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          // Add login logic here
+          alert('Login functionality would be implemented here');
+        });
+    </script> 
 </body>
 </html>
