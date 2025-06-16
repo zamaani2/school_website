@@ -1,723 +1,861 @@
-{% extends 'school/base.html' %}
-
-{% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Akontombra SHS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <style>
-        :root {
-            --primary-color: #1a4d2e;
-            --primary-light: #2a6d4e;
-            --primary-dark: #0f3a1e;
-            --secondary-color: #ffd700;
-            --secondary-light: #ffdf4d;
-            --white: #ffffff;
-            --gray: #666666;
-            --gray-light: #f5f5f5;
-            --dark: #333333;
-            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--gray-light);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-            padding-top: 0 !important; /* Override any padding from bootstrap */
-        }
-
-        .hero {
-            position: relative;
-            height: 90vh;
-            width: 100%;
-            overflow: hidden;
-            margin-top: 0;
-        }
-
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(26, 77, 46, 0.8), rgba(26, 77, 46, 0.8)), 
-                        url('https://source.unsplash.com/1600x900/?school,classroom') center/cover;
-            z-index: 1;
-            transform: scale(1.05);
-            animation: heroZoom 10s infinite alternate ease-in-out;
-        }
-
-        @keyframes heroZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards;
-            letter-spacing: -1px;
-        }
-
-        .hero-content p {
-            font-size: 1.4rem;
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s 0.3s forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 2.5rem;
-            position: relative;
-            padding-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--secondary-color);
-            border-radius: 2px;
-        }
-
-        .section-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3.5rem;
-            font-size: 1.1rem;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            position: relative;
-            z-index: 1;
-            border: none;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--secondary-color);
-            z-index: 2;
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-content {
-            padding: 2.5rem;
-        }
-
-        .card h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 1.2rem;
-            position: relative;
-            padding-bottom: 12px;
-        }
-        
-        .card h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--secondary-color);
-        }
-
-        .card p {
-            color: var(--gray);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .achievement-card {
-            position: relative;
-            padding-left: 70px;
-        }
-
-        .achievement-card::before {
-            content: '\f091';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 25px;
-            top: 35px;
-            font-size: 2.2rem;
-            color: var(--secondary-color);
-        }
-
-        .leadership {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 3rem;
-        }
-
-        .leader {
-            width: 280px;
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .leader:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .leader-img {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .leader-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .leader:hover .leader-img img {
-            transform: scale(1.1);
-        }
-
-        .leader-info {
-            padding: 1.8rem;
-            text-align: center;
-        }
-
-        .leader-info h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .leader-info p {
-            color: var(--gray);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .leader-social {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary-light);
-            color: var(--white);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background: var(--secondary-color);
-            color: var(--primary-color);
-            transform: translateY(-5px);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1.2rem 2.5rem;
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            border: 2px solid var(--primary-color);
-            margin-top: 2.5rem;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(26, 77, 46, 0.3);
-        }
-
-        .btn:hover {
-            background: transparent;
-            color: var(--primary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(26, 77, 46, 0.4);
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .parallax-section {
-            position: relative;
-            padding: 7rem 2rem;
-            background: linear-gradient(rgba(26, 77, 46, 0.9), rgba(26, 77, 46, 0.9)), 
-                      url('https://source.unsplash.com/1600x900/?students,education') center/cover fixed;
-            color: var(--white);
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .stat {
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        
-        .stat:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 0.8rem;
-            color: var(--secondary-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .stat-text {
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 3.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .card-content {
-                padding: 1.8rem;
-            }
-            
-            .stat-number {
-                font-size: 3rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero {
-                height: 80vh;
-            }
-            
-            .container {
-                padding: 3rem 1.5rem;
-            }
-            
-            .card h3 {
-                font-size: 1.6rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-image"></div>
-        <div class="hero-content">
-            <h1>Welcome to Akontombra SHS</h1>
-            <p>Nurturing excellence, developing character, and building futures since 1994</p>
+{% extends 'school/base.html' %} {% load static %} {% block title %}About -
+Akontombra SHS{% endblock %} {% block content %}
+<!-- About Page Modern Redesign -->
+<div class="about-hero">
+  <div class="about-hero-content">
+    <h1 data-aos="fade-down">About Akontombra Senior High School</h1>
+    <p data-aos="fade-up" data-aos-delay="200">
+      Nurturing excellence, developing character, and building futures since
+      1994.
+    </p>
+    </div>
         </div>
-    </section>
 
-    <!-- History Section -->
-    <section class="container">
-        <h2 class="section-title" data-aos="fade-up">OUR HISTORY</h2>
-        <p class="section-intro" data-aos="fade-up" data-aos-delay="100">
-            Founded in Ghana, Akontombra Senior High School has been a pillar of education for decades, committed to academic excellence and character development. Akontombra Senior High School (AKONSEC) is a non-denominational Day/Boarding Co-educational institution. It was established in 1994 after Akontombra D/C Methodist primary school was relocated. The school is being nurtured on strong moral principles. The school is located at New Zongo, near the mosque, on Akontombra – Bodi road. The school started with a population of about 50 students and 3 teaching staff in 1994. Currently, the students population is 1211 (616 boys and 595 girls) and a staff strength of 89.
-        </p>
+<div class="about-main">
+  <div class="about-section">
+        <h2 class="section-title" data-aos="fade-up">Our Legacy</h2>
+    <p class="section-description" data-aos="fade-up" data-aos-delay="100">
+      Founded in Ghana, Akontombra Senior High School has been a pillar of
+      education for decades, committed to academic excellence and character
+      development. Established in 1994 after Akontombra D/C Methodist primary
+      school was relocated, our school has grown to become an institution of
+      distinction.
+    </p>
 
-        <!-- Mission/Vision Section -->
-        <div class="grid" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-                <div class="card-content">
+    <div class="values-grid">
+      <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="value-icon">
+          <i class="fas fa-bullseye"></i>
+                    </div>
                     <h3>Our Mission</h3>
-                    <p>Impacting knowledge to learners for better development</p>
-                </div>
+        <p>
+          Impacting knowledge to learners for better development, fostering
+          critical thinking, and preparing students for global citizenship in an
+          ever-evolving world.
+        </p>
             </div>
 
-            <div class="card">
-                <div class="card-content">
+      <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="value-icon">
+          <i class="fas fa-eye"></i>
+                    </div>
                     <h3>Our Vision</h3>
-                    <p>A Centre of Academic Excellence in the delivery of holistic education to transform learners to compete globally</p>
-                </div>
+        <p>
+          A Centre of Academic Excellence in the delivery of holistic education
+          to transform learners to compete globally while maintaining strong
+          moral values.
+        </p>
             </div>
 
-            <div class="card">
-                <div class="card-content">
+      <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="value-icon">
+          <i class="fas fa-heart"></i>
+                    </div>
                     <h3>Core Values</h3>
-                    <p>The core values are "seeking knowledge, unity, discipline, hard work and tolerance"</p>
+        <p>
+          Seeking knowledge, unity, discipline, hard work, and tolerance - the
+          foundation principles that guide every aspect of our educational
+          journey.
+        </p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Stats Section -->
-    <section class="parallax-section">
-        <h2 class="section-title" style="color: white;" data-aos="fade-up">THE NUMBERS</h2>
-        <div class="stat-grid">
-            <div class="stat" data-aos="zoom-in" data-aos-delay="100">
-                <div class="stat-number" id="student-count">0</div>
-                <div class="stat-text">Students</div>
+  <div class="stats-section" data-aos="fade-in">
+    <h2 class="section-title">Excellence in Numbers</h2>
+        <div class="stats-grid">
+            <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-icon">
+          <i class="fas fa-user-graduate"></i>
+                </div>
+        <div class="stat-number" id="student-count">1,200+</div>
+                <div class="stat-text">Active Students</div>
             </div>
-            <div class="stat" data-aos="zoom-in" data-aos-delay="200">
-                <div class="stat-number" id="staff-count">0</div>
-                <div class="stat-text">Staff Members</div>
+            <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+        <div class="stat-number" id="staff-count">80+</div>
+                <div class="stat-text">Dedicated Staff</div>
             </div>
-            <div class="stat" data-aos="zoom-in" data-aos-delay="300">
-                <div class="stat-number" id="year-count">0</div>
+            <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-icon">
+          <i class="fas fa-calendar-alt"></i>
+                </div>
+        <div class="stat-number" id="year-count">29</div>
                 <div class="stat-text">Years of Excellence</div>
             </div>
-            <div class="stat" data-aos="zoom-in" data-aos-delay="400">
-                <div class="stat-number" id="program-count">0</div>
+            <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-icon">
+          <i class="fas fa-book-open"></i>
+                </div>
+        <div class="stat-number" id="program-count">12</div>
                 <div class="stat-text">Academic Programs</div>
             </div>
         </div>
-    </section>
+                        </div>
 
-    <!-- Achievements Section -->
-    <section class="container">
-        <h2 class="section-title" data-aos="fade-up">OUR ACHIEVEMENTS</h2>
-        <div class="grid" data-aos="fade-up" data-aos-delay="100">
-            <div class="card achievement-card">
-                <div class="card-content">
-                    <h3>BEST SCHOOL IN WESTERN NORTH</h3>
-                    <p>Compete in the National Science and Maths Quiz at Accra.</p>
-                </div>
-            </div>
+  <div class="leadership-section">
+        <h2 class="section-title" data-aos="fade-up">School Leadership</h2>
+    <div class="leadership-grid">
+      <div class="leader-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="leader-img-wrapper">
+          <img
+            src="{% static 'images/headmaster.jpg' %}"
+            alt="Headmaster"
+            class="leader-img"
+            onerror="this.src='{% static 'images/placeholder-person.jpg' %}'"
+          />
+                        </div>
+                        <div class="leader-info">
+                            <h4>Mr. Louis Agyei Boakye</h4>
+                            <p>Headmaster</p>
+                            <div class="leader-social">
+            <a href="#" class="social-icon" aria-label="Linkedin profile"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" class="social-icon" aria-label="Twitter profile"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              href="mailto:headmaster@akontombrashs.edu.gh"
+              class="social-icon"
+              aria-label="Email contact"
+              ><i class="fas fa-envelope"></i
+            ></a>
+                            </div>
+                        </div>
+                    </div>
+      <div class="leader-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="leader-img-wrapper">
+          <img
+            src="{% static 'images/admin-head.jpg' %}"
+            alt="Administration Head"
+            class="leader-img"
+            onerror="this.src='{% static 'images/placeholder-person.jpg' %}'"
+          />
+                        </div>
+                        <div class="leader-info">
+                            <h4>Mr. Martin Yaw Tetteh</h4>
+                            <p>Assistant Headmaster (Administration)</p>
+                            <div class="leader-social">
+            <a href="#" class="social-icon" aria-label="Linkedin profile"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" class="social-icon" aria-label="Twitter profile"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              href="mailto:admin@akontombrashs.edu.gh"
+              class="social-icon"
+              aria-label="Email contact"
+              ><i class="fas fa-envelope"></i
+            ></a>
+                            </div>
+                        </div>
+                    </div>
+      <div class="leader-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="leader-img-wrapper">
+          <img
+            src="/static/no_user_img.png"
+            alt="School Accountant"
+            class="leader-img"
+            onerror="this.src='https://source.unsplash.com/320x280/?professional,woman,accountant'"
+          />
+                        </div>
+                        <div class="leader-info">
+                            <h4>Mrs. Sarah Mensah</h4>
+                            <p>School Accountant</p>
+                            <div class="leader-social">
+            <a href="#" class="social-icon"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                            </div>
 
-            <div class="card achievement-card">
-                <div class="card-content">
-                    <h3>Excellent Facilities</h3>
-                    <p>From modern classrooms to science labs, we ensure the best learning environment.</p>
-                </div>
-            </div>
+  <div class="achievements-section">
+    <h2 class="section-title" data-aos="fade-up">Our Achievements</h2>
+    <div class="achievements-grid">
+      <div class="achievement-card" data-aos="flip-left" data-aos-delay="100">
+        <div class="achievement-icon">
+          <i class="fas fa-trophy"></i>
+                        </div>
+        <h3>Best School in Western North</h3>
+        <p>
+          Recognized for outstanding performance and successfully competing in
+          the National Science and Maths Quiz at Accra, representing our region
+          with pride and excellence.
+        </p>
+                            </div>
+      <div class="achievement-card" data-aos="flip-left" data-aos-delay="200">
+        <div class="achievement-icon">
+          <i class="fas fa-microscope"></i>
+                        </div>
+        <h3>State-of-the-Art Facilities</h3>
+        <p>
+          Modern classrooms, fully equipped science laboratories, and digital
+          learning centers that provide students with the best possible learning
+          environment.
+        </p>
+                    </div>
+      <div class="achievement-card" data-aos="flip-left" data-aos-delay="300">
+        <div class="achievement-icon">
+          <i class="fas fa-hands-helping"></i>
+                        </div>
+        <h3>Comprehensive Student Support</h3>
+        <p>
+          Our dedicated mentorship programs, counseling services, and career
+          guidance ensure every student receives personalized support for their
+          academic and personal growth.
+        </p>
+                            </div>
+      <div class="achievement-card" data-aos="flip-left" data-aos-delay="400">
+        <div class="achievement-icon">
+          <i class="fas fa-globe"></i>
+                        </div>
+        <h3>Global Recognition</h3>
+        <p>
+          Our alumni have gone on to excel in universities worldwide, carrying
+          the values and knowledge gained at Akontombra SHS to make positive
+          impacts globally.
+        </p>
+                    </div>
+                        </div>
+                            </div>
+                        </div>
 
-            <div class="card achievement-card">
-                <div class="card-content">
-                    <h3>Strong Student Support</h3>
-                    <p>We provide mentorship, counseling, and career guidance to help students succeed.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+                </button>
 
-    <!-- Leadership Section -->
-    <section class="container">
-        <h2 class="section-title" data-aos="fade-up">SCHOOL MANAGEMENT</h2>
-        <div class="leadership">
-            <div class="leader" data-aos="fade-up" data-aos-delay="100">
-                <div class="leader-img">
-                    <img src="/static/headmaster.jpg" alt="Headmaster" onerror="this.src='https://source.unsplash.com/300x300/?principal'">
-                </div>
-                <div class="leader-info">
-                    <h4>MR. LOUIS AGYEI BOAKYE</h4>
-                    <p>Headmaster</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="200">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Academic Head">
-                </div>
-                <div class="leader-info">
-                    <h4>MR. PETER COFFIE</h4>
-                    <p>Assistant Headmaster (Academic)</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Student Affairs">
-                </div>
-                <div class="leader-info">
-                    <h4>MR. MARTIN YAW TETTEH</h4>
-                    <p>Assistant Headmaster (Administration)</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Student Affairs">
-                </div>
-                <div class="leader-info">
-                    <h4>MR. MARTIN YAW TETTEH</h4>
-                    <p>School Accountant</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Student Affairs">
-                </div>
-                <div class="leader-info">
-                    <h4>MR. MORO ISAAC</h4>
-                    <p>Senior House Master</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Student Affairs">
-                </div>
-                <div class="leader-info">
-                    <h4>MADAM LYDIA NGMALE</h4>
-                    <p>Senior House Mistress</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- FontAwesome Icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
-        <h2 class="section-title mt-5 pt-5" data-aos="fade-up">BOARD OF DIRECTORS</h2>
-        <div class="leadership">
-            <div class="leader" data-aos="fade-up" data-aos-delay="100">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="head" onerror="this.src='https://source.unsplash.com/300x300/?principal'">
-                </div>
-                <div class="leader-info">
-                    <h4>Mr. James Mensah</h4>
-                    <p>Headmaster</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="200">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Academic Head">
-                </div>
-                <div class="leader-info">
-                    <h4>Mrs. Akosua Osei</h4>
-                    <p>Academic Head</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="leader" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-img">
-                    <img src="/static/no_user_img.png" alt="Student Affairs">
-                </div>
-                <div class="leader-info">
-                    <h4>Dr. Kwame Boadu</h4>
-                    <p>Dean of Student Affairs</p>
-                    <div class="leader-social">
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-        <div class="text-center">
-            <a href="#admissions" class="btn" data-aos="fade-up">Join Akontombra SHS</a>
-        </div>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS (Animate On Scroll)
+<!-- Page Enhancement Scripts -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize AOS (Animate On Scroll)
             AOS.init({
                 duration: 800,
-                easing: 'ease-out',
+      easing: "ease-in-out",
                 once: true,
                 offset: 100,
-                delay: 100
-            });
+    });
 
-            // Counter animation
-            function animateCounter(id, start, end, duration) {
-                let startTimestamp = null;
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const value = Math.floor(progress * (end - start) + start);
-                    document.getElementById(id).innerText = value;
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
+    // Stats animation
+    const stats = [
+      { id: "student-count", value: 1200 },
+      { id: "staff-count", value: 80 },
+      { id: "year-count", value: 29 },
+      { id: "program-count", value: 12 },
+    ];
+
+    // Check if IntersectionObserver is supported
+    if ("IntersectionObserver" in window) {
+      const statsSection = document.querySelector(".stats-section");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Start animation when stats section comes into view
+              stats.forEach((stat) => animateStat(stat.id, stat.value));
+              // Unobserve after animation starts
+              observer.unobserve(entry.target);
             }
+          });
+        },
+        { threshold: 0.2 }
+      );
 
-            // Intersection Observer to trigger counter animations when scrolled into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounter('student-count', 0, 1211, 2000);
-                        animateCounter('staff-count', 0, 89, 2000);
-                        animateCounter('year-count', 0, 31, 2000);
-                        animateCounter('program-count', 0, 6, 2000);
-                        observer.unobserve(entry.target);
+      // Start observing the stats section
+      observer.observe(statsSection);
+    } else {
+      // Fallback for browsers that don't support IntersectionObserver
+      stats.forEach((stat) => {
+        document.getElementById(stat.id).textContent = stat.value + "+";
+      });
+    }
+
+    // Function to animate counting
+    function animateStat(id, endValue) {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      let startValue = 0;
+      const duration = 2000; // 2 seconds
+      const startTime = performance.now();
+
+      function updateCount(currentTime) {
+        const elapsedTime = currentTime - startTime;
+
+        if (elapsedTime < duration) {
+          // Calculate the current value based on elapsed time
+          const progress = elapsedTime / duration;
+          const currentValue = Math.floor(progress * endValue);
+          element.textContent = currentValue + "+";
+
+          // Continue animation
+          requestAnimationFrame(updateCount);
+        } else {
+          // Ensure final value is set
+          element.textContent = endValue + "+";
+        }
+      }
+
+      // Start the animation
+      requestAnimationFrame(updateCount);
+    }
+
+    // Add hover effects to leadership cards
+    const leaderCards = document.querySelectorAll(".leader-card");
+    leaderCards.forEach((card) => {
+      card.addEventListener("mouseenter", function () {
+        const socialIcons = this.querySelectorAll(".social-icon");
+        socialIcons.forEach((icon, index) => {
+          setTimeout(() => {
+            icon.style.transform = "translateY(-10px)";
+            setTimeout(() => {
+              icon.style.transform = "translateY(-3px)";
+            }, 200);
+          }, index * 100);
+        });
+      });
+    });
+
+    // Add parallax effect to hero section
+    const heroSection = document.querySelector(".about-hero");
+    window.addEventListener("scroll", function () {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition < 600) {
+        heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+                        e.preventDefault();
+        const targetId = this.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: "smooth",
+          });
                     }
                 });
-            }, { threshold: 0.5 });
-
-            const statsSection = document.querySelector('.parallax-section');
-            if (statsSection) {
-                observer.observe(statsSection);
-            }
-
-            // Parallax effect for hero section
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.pageYOffset;
-                const heroImage = document.querySelector('.hero-image');
-                if (heroImage) {
-                    heroImage.style.transform = `scale(1.05) translateY(${scrollPosition * 0.05}px)`;
-                }
             });
-        });
-    </script>
-</body>
+
+    // Add interactive hover effects to achievement cards
+    const achievementCards = document.querySelectorAll(".achievement-card");
+    achievementCards.forEach((card) => {
+      card.addEventListener("mouseenter", function () {
+        const icon = this.querySelector(".achievement-icon i");
+        icon.classList.add("fa-beat");
+        setTimeout(() => {
+          icon.classList.remove("fa-beat");
+        }, 1000);
+      });
+    });
+
+    // Add scroll progress indicator
+    const progressIndicator = document.createElement("div");
+    progressIndicator.className = "scroll-progress";
+    document.body.appendChild(progressIndicator);
+
+    window.addEventListener("scroll", function () {
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      progressIndicator.style.width = scrolled + "%";
+    });
+
+    // Back to top button functionality
+    const backToTopButton = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add("show");
+                } else {
+        backToTopButton.classList.remove("show");
+      }
+    });
+
+    backToTopButton.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Add interactive effects to value cards
+    const valueCards = document.querySelectorAll(".value-card");
+    valueCards.forEach((card) => {
+      card.addEventListener("click", function () {
+        this.classList.add("pulse");
+        setTimeout(() => {
+          this.classList.remove("pulse");
+        }, 1000);
+      });
+    });
+
+    // Add typing effect to the hero section heading
+    const heroHeading = document.querySelector(".about-hero-content h1");
+    if (heroHeading) {
+      const text = heroHeading.textContent;
+      heroHeading.textContent = "";
+
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        if (i < text.length) {
+          heroHeading.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }, 50);
+    }
+  });
+</script>
+
+<style>
+  /* Hero Section */
+  .about-hero {
+    background: linear-gradient(rgba(26, 77, 46, 0.7), rgba(26, 77, 46, 0.7)),
+      url("https://source.unsplash.com/1600x600/?school,campus") center/cover
+        no-repeat;
+    padding: 90px 0 60px 0;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: background-position 0.3s ease;
+  }
+  .about-hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-family: "Playfair Display", serif;
+  }
+  .about-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+  }
+
+  /* Main Layout */
+  .about-main {
+    max-width: 1200px;
+    margin: -40px auto 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    padding: 40px 30px;
+  }
+
+  /* Section Styles */
+  .section-title {
+    font-size: 1.8rem;
+    color: #1a4d2e;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #ffd700;
+    border-radius: 2px;
+  }
+
+  .section-description {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  /* Values Grid */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+  }
+
+  .value-card {
+    background: #f7faf7;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(26, 77, 46, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(26, 77, 46, 0.1);
+  }
+
+  .value-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #1a4d2e 0%, #2a6d4e 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 1.8rem;
+  }
+
+  .value-card h3 {
+    color: #1a4d2e;
+    margin-bottom: 12px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .value-card p {
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin: 50px 0;
+    padding: 40px 20px;
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.03) 0%,
+      rgba(26, 77, 46, 0.06) 100%
+    );
+    border-radius: 15px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .stat-card {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .stat-icon {
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 15px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a4d2e;
+    margin-bottom: 5px;
+  }
+
+  .stat-text {
+    color: #555;
+    font-weight: 500;
+  }
+
+  /* Leadership Section */
+  .leadership-section {
+    margin: 50px 0;
+  }
+
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .leader-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+  }
+
+  .leader-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .leader-img-wrapper {
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .leader-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .leader-card:hover .leader-img {
+    transform: scale(1.05);
+  }
+
+  .leader-info {
+    padding: 20px;
+    text-align: center;
+    border-top: 3px solid #ffd700;
+  }
+
+  .leader-info h4 {
+    color: #1a4d2e;
+    margin-bottom: 5px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .leader-info p {
+    color: #4a6741;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+
+  .leader-social {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1a4d2e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+
+  .social-icon:hover {
+    background: #ffd700;
+    color: #1a4d2e;
+    transform: translateY(-3px);
+  }
+
+  /* Achievements Section */
+  .achievements-section {
+    margin: 50px 0 20px;
+  }
+
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .achievement-card {
+    background: #f7faf7;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(26, 77, 46, 0.06);
+    border-left: 4px solid #ffd700;
+    transition: transform 0.3s;
+  }
+
+  .achievement-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .achievement-icon {
+    font-size: 2.5rem;
+    color: #1a4d2e;
+    margin-bottom: 15px;
+  }
+
+  .achievement-card h3 {
+    color: #1a4d2e;
+    margin-bottom: 12px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .achievement-card p {
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Scroll Progress Indicator */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(to right, #1a4d2e, #ffd700);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.2s ease;
+  }
+
+  /* Animation transitions for cards */
+  .value-card,
+  .stat-card,
+  .leader-card,
+  .achievement-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      box-shadow 0.4s ease;
+  }
+
+  /* Pulse animation for icons */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .value-icon:hover i,
+  .stat-icon:hover i {
+    animation: pulse 1s infinite;
+  }
+
+  /* Social icons transition */
+  .social-icon {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+      background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .about-main {
+      padding: 30px 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-hero-content h1 {
+      font-size: 2.2rem;
+    }
+
+    .values-grid,
+    .stats-grid,
+    .leadership-grid,
+    .achievements-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+
+  @media (max-width: 576px) {
+    .about-hero {
+      padding: 60px 0 40px 0;
+    }
+
+    .about-hero-content h1 {
+      font-size: 1.8rem;
+    }
+
+    .about-hero-content p {
+      font-size: 1rem;
+    }
+
+    .about-main {
+      padding: 25px 15px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+    }
+  }
+
+  /* Back to Top Button */
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #1a4d2e;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    background: #ffd700;
+    color: #1a4d2e;
+  }
+
+  /* Card pulse animation */
+  @keyframes cardPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.03);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .value-card.pulse {
+    animation: cardPulse 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+</style>
 {% endblock %}
