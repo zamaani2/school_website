@@ -1,4 +1,5 @@
-{% extends 'school/base.html' %} {% block content %}
+{% extends 'school/base.html' %}
+{% block content %}
 <style>
   :root {
     --primary-color: #1a4d2e;
@@ -25,34 +26,137 @@
     background-color: var(--background-light);
     color: var(--gray);
     line-height: 1.6;
+    overflow-x: hidden;
   }
 
   .container {
     max-width: 1400px;
     margin: 0 auto;
+  }
+
+  .container>*:not(.hero) {
     padding: 2rem;
   }
 
   /* Hero Section */
-  .hero-section {
-    background: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.95)),
-      url("/static/school-campus.jpg");
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
-    padding: 5rem 2rem;
-    margin-bottom: 3rem;
-    border-radius: 15px;
+  .hero {
     position: relative;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: -60px;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    visibility: hidden;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-section {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center !important;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-content {
     max-width: 800px;
-    margin: 0 auto;
+    padding: 2rem;
     text-align: center;
     position: relative;
     z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-in-out;
+  }
+
+  .carousel-slide.active .hero-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+  }
+
+  .carousel-btn.prev {
+    left: 20px;
+  }
+
+  .carousel-btn.next {
+    right: 20px;
+  }
+
+  .carousel-btn i {
+    font-size: 1.5rem;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--secondary-color);
+    transform: scale(1.2);
   }
 
   .hero-title {
@@ -446,47 +550,158 @@
       transform: translateY(0);
     }
   }
+
+  /* Carousel Styles */
+  .carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 15px;
+  }
+
+  .carousel-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5rem 2rem;
+    color: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .carousel-slide.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .carousel-slide:not(.active) {
+    opacity: 0;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .carousel-btn.prev {
+    left: 10px;
+  }
+
+  .carousel-btn.next {
+    right: 10px;
+  }
+
+  .carousel-dots {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .carousel-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background: var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .carousel-dot.active {
+    transform: scale(1.2);
+    background: var(--secondary-color);
+  }
 </style>
 
 <div class="container">
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-section">
-      <div class="hero-content">
-        <h1 class="hero-title">
-          Shaping <span>Futures</span> Through Education
-        </h1>
-        <p class="hero-subtitle">
-          Experience excellence in education with our comprehensive academic
-          programs designed to nurture the next generation of leaders.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#programs" class="hero-btn hero-btn-primary">Explore Programs</a>
-          <a href="#contact" class="hero-btn hero-btn-secondary">Contact Us</a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-number" data-count="25">25+</div>
-            <div class="stat-text">Years of Excellence</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-count="96">96%</div>
-            <div class="stat-text">Graduation Rate</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-count="32">65</div>
-            <div class="stat-text">Qualified Teachers</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number" data-count="6">5</div>
-            <div class="stat-text">Academic Programs</div>
+    <div class="carousel-container">
+      <div class="carousel-slide active">
+        <div class="hero-section"
+          style="background: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.95)), url('/static/slide2.jpg');">
+          <div class="hero-content">
+            <h1 class="hero-title">Shaping <span>Futures</span> Through Education</h1>
+            <p class="hero-subtitle">Experience excellence in education with our comprehensive academic programs.</p>
+            <div class="hero-buttons">
+              <a href="#programs" class="hero-btn hero-btn-primary">Explore Programs</a>
+              <a href="#contact" class="hero-btn hero-btn-secondary">Contact Us</a>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="carousel-slide">
+        <div class="hero-section"
+          style="background: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.95)), url('/static/GALLERY/s15.jpg');">
+          <div class="hero-content">
+            <h1 class="hero-title">Excellence in <span>Academic</span> Programs</h1>
+            <p class="hero-subtitle">Choose from our diverse range of academic programs tailored for success.</p>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number" data-count="25">25+</div>
+                <div class="stat-text">Years of Excellence</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-count="96">96%</div>
+                <div class="stat-text">Graduation Rate</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-count="65">65</div>
+                <div class="stat-text">Qualified Teachers</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-count="5">5</div>
+                <div class="stat-text">Academic Programs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="hero-section"
+          style="background: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.95)), url('/static/GALLERY/s27.jpg');">
+          <div class="hero-content">
+            <h1 class="hero-title">Building <span>Leaders</span> of Tomorrow</h1>
+            <p class="hero-subtitle">Join our community of learners and innovators.</p>
+            <div class="hero-buttons">
+              <a href="#leadershipTeam" class="hero-btn hero-btn-primary">Meet Our Team</a>
+              <a href="#programs" class="hero-btn hero-btn-secondary">View Programs</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-btn prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-btn next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <div class="carousel-dots"></div>
     </div>
   </section>
+
   <h1 class="section-title">Heads of Department</h1>
 
   <div class="leadership" id="leadershipTeam">
@@ -516,7 +731,7 @@
       <p>ICT Department</p>
     </div>
     <div class="leader">
-      <img src="/static/no_user_img.png"alt="ICT Department Head" />
+      <img src="/static/no_user_img.png" alt="ICT Department Head" />
       <h4>Madam Peace Akua</h4>
       <p>Home Economics Department</p>
     </div>
@@ -653,10 +868,84 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Animation for hero stats
-    const statNumbers = document.querySelectorAll(".stat-number");
+    // Carousel functionality
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    let currentSlide = 0;
+    let slideInterval;
 
-    // Add animation to stats
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlide() {
+      slides.forEach(slide => {
+        slide.classList.remove('active');
+      });
+      dots.forEach(dot => {
+        dot.classList.remove('active');
+      });
+
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlide();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlide();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlide();
+      resetInterval();
+    }
+
+    function resetInterval() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetInterval();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetInterval();
+    });
+
+    // Start automatic slideshow
+    slideInterval = setInterval(nextSlide, 5000);
+
+    // Pause slideshow on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+
+    carouselContainer.addEventListener('mouseleave', () => {
+      slideInterval = setInterval(nextSlide, 5000);
+    });
+
+    // Animation for stats
+    const statNumbers = document.querySelectorAll(".stat-number");
     statNumbers.forEach((stat) => {
       stat.style.opacity = "0";
       setTimeout(() => {

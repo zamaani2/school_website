@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Akontombra SHS</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
+            --primary-color: #1a4d2e;
             --primary-light: #2a6d4e;
+            --primary-dark: #0f3a1e;
             --secondary-color: #ffd700;
+            --secondary-light: #ffdf4d;
             --white: #ffffff;
             --gray: #666666;
             --gray-light: #f5f5f5;
             --dark: #333333;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -31,13 +36,15 @@
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            padding-top: 0 !important; /* Override any padding from bootstrap */
         }
 
         .hero {
             position: relative;
-            height: 80vh;
+            height: 90vh;
             width: 100%;
             overflow: hidden;
+            margin-top: 0;
         }
 
         .hero-image {
@@ -46,9 +53,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(26, 77, 46, 0.7), rgba(26, 77, 46, 0.7)), 
+            background: linear-gradient(rgba(26, 77, 46, 0.8), rgba(26, 77, 46, 0.8)), 
                         url('https://source.unsplash.com/1600x900/?school,classroom') center/cover;
             z-index: 1;
+            transform: scale(1.05);
+            animation: heroZoom 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes heroZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
 
         .hero-content {
@@ -65,16 +79,18 @@
         }
 
         .hero-content h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
+            font-weight: 800;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s forwards;
+            letter-spacing: -1px;
         }
 
         .hero-content p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             max-width: 700px;
             margin: 0 auto;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -93,16 +109,18 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             position: relative;
             padding-bottom: 15px;
+            letter-spacing: -1px;
         }
 
         .section-title::after {
@@ -120,14 +138,15 @@
         .section-intro {
             text-align: center;
             max-width: 800px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 3.5rem;
             font-size: 1.1rem;
             color: var(--gray);
+            line-height: 1.8;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
@@ -135,10 +154,11 @@
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
             position: relative;
             z-index: 1;
+            border: none;
         }
 
         .card::before {
@@ -153,28 +173,42 @@
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .card-content {
-            padding: 2rem;
+            padding: 2.5rem;
         }
 
         .card h3 {
             font-size: 1.8rem;
+            font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
         }
 
         .card p {
             color: var(--gray);
-            font-size: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         .achievement-card {
             position: relative;
-            padding-left: 60px;
+            padding-left: 70px;
         }
 
         .achievement-card::before {
@@ -182,9 +216,9 @@
             font-family: 'Font Awesome 5 Free';
             font-weight: 900;
             position: absolute;
-            left: 20px;
-            top: 30px;
-            font-size: 2rem;
+            left: 25px;
+            top: 35px;
+            font-size: 2.2rem;
             color: var(--secondary-color);
         }
 
@@ -201,17 +235,18 @@
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .leader:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .leader-img {
             position: relative;
-            height: 230px;
+            height: 250px;
             overflow: hidden;
         }
 
@@ -227,25 +262,27 @@
         }
 
         .leader-info {
-            padding: 1.5rem;
+            padding: 1.8rem;
             text-align: center;
         }
 
         .leader-info h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
         }
 
         .leader-info p {
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
 
         .leader-social {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-top: 15px;
         }
 
@@ -253,36 +290,41 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--primary-light);
             color: var(--white);
-            font-size: 0.9rem;
-            transition: background 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .social-icon:hover {
             background: var(--secondary-color);
             color: var(--primary-color);
+            transform: translateY(-5px);
         }
 
         .btn {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             background-color: var(--primary-color);
             color: var(--white);
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 50px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             border: 2px solid var(--primary-color);
-            margin-top: 2rem;
+            margin-top: 2.5rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(26, 77, 46, 0.3);
         }
 
         .btn:hover {
             background: transparent;
             color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(26, 77, 46, 0.4);
         }
 
         .text-center {
@@ -291,8 +333,8 @@
 
         .parallax-section {
             position: relative;
-            padding: 6rem 2rem;
-            background: linear-gradient(rgba(26, 77, 46, 0.85), rgba(26, 77, 46, 0.85)), 
+            padding: 7rem 2rem;
+            background: linear-gradient(rgba(26, 77, 46, 0.9), rgba(26, 77, 46, 0.9)), 
                       url('https://source.unsplash.com/1600x900/?students,education') center/cover fixed;
             color: var(--white);
             text-align: center;
@@ -301,51 +343,92 @@
 
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .stat {
-            padding: 2rem;
-            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .stat:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
             color: var(--secondary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .stat-text {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             .hero-content p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .card-content {
-                padding: 1.5rem;
+                padding: 1.8rem;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
             }
         }
-
-        /* For dark mode support */
-       
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+            
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .card h3 {
+                font-size: 1.6rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -392,7 +475,7 @@
 
     <!-- Stats Section -->
     <section class="parallax-section">
-        <h2 class="section-title" style="color: white;">THE NUMBERS</h2>
+        <h2 class="section-title" style="color: white;" data-aos="fade-up">THE NUMBERS</h2>
         <div class="stat-grid">
             <div class="stat" data-aos="zoom-in" data-aos-delay="100">
                 <div class="stat-number" id="student-count">0</div>
@@ -449,7 +532,7 @@
                     <img src="/static/headmaster.jpg" alt="Headmaster" onerror="this.src='https://source.unsplash.com/300x300/?principal'">
                 </div>
                 <div class="leader-info">
-                    <h4>MR. lOUIS AGYEI BOAKYE</h4>
+                    <h4>MR. LOUIS AGYEI BOAKYE</h4>
                     <p>Headmaster</p>
                     <div class="leader-social">
                         <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
@@ -464,7 +547,7 @@
                 </div>
                 <div class="leader-info">
                     <h4>MR. PETER COFFIE</h4>
-                    <p>Asisstant Headmaster (Academic)</p>
+                    <p>Assistant Headmaster (Academic)</p>
                     <div class="leader-social">
                         <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -478,7 +561,7 @@
                 </div>
                 <div class="leader-info">
                     <h4>MR. MARTIN YAW TETTEH</h4>
-                    <p>Asisstant Headmaster (Administration)</p>
+                    <p>Assistant Headmaster (Administration)</p>
                     <div class="leader-social">
                         <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -530,7 +613,7 @@
             </div>
         </div>
 
-        <h2  style="padding-top: 60px;" class="section-title" data-aos="fade-up">BOARD OF DIRECTORS</h2>
+        <h2 class="section-title mt-5 pt-5" data-aos="fade-up">BOARD OF DIRECTORS</h2>
         <div class="leadership">
             <div class="leader" data-aos="fade-up" data-aos-delay="100">
                 <div class="leader-img">
@@ -581,14 +664,16 @@
         </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize AOS (Animate On Scroll)
             AOS.init({
                 duration: 800,
-                easing: 'ease',
+                easing: 'ease-out',
                 once: true,
-                offset: 100
+                offset: 100,
+                delay: 100
             });
 
             // Counter animation
@@ -629,7 +714,7 @@
                 const scrollPosition = window.pageYOffset;
                 const heroImage = document.querySelector('.hero-image');
                 if (heroImage) {
-                    heroImage.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+                    heroImage.style.transform = `scale(1.05) translateY(${scrollPosition * 0.05}px)`;
                 }
             });
         });
