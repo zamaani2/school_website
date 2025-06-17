@@ -39,126 +39,93 @@
 
   <body>
     <header class="main-header">
-      <nav class="nav-container">
-        <a href="{% url 'home' %}" class="logo">
-          <img src="/static/LOGO2.png" alt="Akontombra SHS Logo" />
-          <span>AKONSEC</span>
-        </a>
-        <button class="mobile-menu-btn" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="main-nav">
-          <a
-            class="nav-link {% if request.path == '/' %}active{% endif %}"
-            href="{% url 'home' %}"
-            >Home</a
-          >
-          <a
-            class="nav-link {% if request.path == '/programs/' %}active{% endif %}"
-            href="{% url 'programs' %}"
-            >Academics</a
-          >
-          <a
-            class="nav-link {% if request.path == '/about/' %}active{% endif %}"
-            href="{% url 'about' %}"
-            >About Us</a
-          >
-          <a
-            class="nav-link {% if request.path == '/gallery/' %}active{% endif %}"
-            href="{% url 'gallery' %}"
-            >Gallery</a
-          >
-          <a
-            class="nav-link {% if request.path == '/contact/' %}active{% endif %}"
-            href="{% url 'contact' %}"
-            >Contact</a
-          >
-        </div>
-      </nav>
+      <div class="container-fluid">
+        <nav class="nav-container">
+          <a href="{% url 'home' %}" class="logo">
+            <img src="/static/LOGO2.png" alt="Akontombra SHS Logo" />
+            <span>AKONSEC</span>
+          </a>
+          <button class="mobile-menu-btn" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="main-nav">
+            <a
+              class="nav-link {% if request.path == '/' %}active{% endif %}"
+              href="{% url 'home' %}"
+              ><i class="fas fa-home"></i> Home</a
+            >
+            <a
+              class="nav-link {% if request.path == '/programs/' %}active{% endif %}"
+              href="{% url 'programs' %}"
+              ><i class="fas fa-graduation-cap"></i> Academics</a
+            >
+            <a
+              class="nav-link {% if request.path == '/about/' %}active{% endif %}"
+              href="{% url 'about' %}"
+              ><i class="fas fa-info-circle"></i> About Us</a
+            >
+            <a
+              class="nav-link {% if request.path == '/gallery/' %}active{% endif %}"
+              href="{% url 'gallery' %}"
+              ><i class="fas fa-images"></i> Gallery</a
+            >
+            <a
+              class="nav-link {% if request.path == '/contact/' %}active{% endif %}"
+              href="{% url 'contact' %}"
+              ><i class="fas fa-envelope"></i> Contact</a
+            >
+          </div>
+        </nav>
+      </div>
     </header>
 
     <main>{% block content %} {% endblock %}</main>
 
     <footer class="footer">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <div class="footer-brand mb-4">
-              <img
-                src="/static/LOGO2.png"
-                alt="Akontombra SHS Logo"
-                class="footer-logo"
-              />
-              <h4 class="mt-3">AKONSEC</h4>
-            </div>
-            <p class="footer-tagline">Empowering Minds, Shaping Futures</p>
-            <div class="social-icons">
-              <a href="#" class="social-icon" aria-label="Facebook"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="#" class="social-icon" aria-label="Twitter"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="#" class="social-icon" aria-label="Instagram"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="#" class="social-icon" aria-label="LinkedIn"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-            <h5 class="footer-heading">Quick Links</h5>
-            <ul class="footer-links">
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="{% url 'about' %}">About Us</a></li>
-              <li><a href="{% url 'programs' %}">Academics</a></li>
-              <li><a href="{% url 'gallery' %}">Gallery</a></li>
-              <li><a href="{% url 'contact' %}">Contact</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="footer-heading">Resources</h5>
-            <ul class="footer-links">
-              <li><a href="#admission">Admission</a></li>
-              <li><a href="#news">News & Events</a></li>
-              <li><a href="#facilities">Facilities</a></li>
-              <li><a href="#student-life">Student Life</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="footer-heading">Contact Us</h5>
-            <ul class="contact-info">
-              <li>
-                <i class="fas fa-map-marker-alt"></i> Akontombra, Western North
-                Region, Ghana
-              </li>
+        <div class="footer-grid">
+          <div class="footer-section contact-section">
+            <h3><i class="fas fa-map-marker-alt"></i> Contact Us</h3>
+            <ul class="contact-list">
+              <li>Akontombra, Western North Region</li>
               <li><i class="fas fa-phone"></i> +233 XX XXX XXXX</li>
               <li><i class="fas fa-envelope"></i> info@akontombrashs.edu.gh</li>
             </ul>
           </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6">
-              <p class="copyright">
-                &copy; {% now "Y" %} Akontombra Senior High School. All Rights
-                Reserved.
-              </p>
-            </div>
-            <div class="col-md-6 text-md-end">
-              <ul class="footer-bottom-links">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Use</a></li>
-              </ul>
+          <div class="footer-section">
+            <h3><i class="fas fa-link"></i> Quick Links</h3>
+            <div class="quick-links">
+              <a href="{% url 'about' %}">About Us</a>
+              <a href="{% url 'programs' %}">Academics</a>
+              <a href="#admission">Admissions</a>
+              <a href="#news">News & Events</a>
             </div>
           </div>
+          <div class="footer-section">
+            <h3><i class="fas fa-share-alt"></i> Connect</h3>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook" title="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="Twitter" title="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram" title="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn" title="LinkedIn"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>
+            &copy; {% now "Y" %} Akontombra Senior High School. All Rights
+            Reserved.
+          </p>
         </div>
       </div>
     </footer>

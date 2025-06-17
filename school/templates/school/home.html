@@ -1,5 +1,12 @@
 {% extends 'school/base.html' %} {% block content %}
 <style>
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Arial", sans-serif;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -43,8 +50,8 @@
     z-index: 2;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     border-radius: var(--radius-lg);
     border: 1px solid rgba(166, 25, 25, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -56,7 +63,7 @@
 
   .carousel-text h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -150,7 +157,7 @@
       width: 95%;
     }
 
-    .carousel-text h1 {
+    .carousel-text h2 {
       font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 1rem;
     }
@@ -413,8 +420,8 @@
     <div class="carousel-slide active" style="background-image: url('/static/slide2.jpg')">
       <div class="carousel-text">
         <h1>Welcome to Akontombra Senior High School</h1>
-        <p>Empowering Minds, Shaping Futures</p>
-        <a href="#admission" class="btn">Apply Now</a>
+        <p style="color: white;">Seek Knowledge, Be Diligent and Work Hard</p>
+        <a href="#admission" class="btn">learn More</a>
       </div>
     </div>
     <div class="carousel-slide" style="background-image: url('/static/emergency_block.jpg')">
